@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using SamMiller.Mumba.Api.Identity.Data;
-using SamMiller.Mumba.Api.Identity.Entities;
+using SamMiller.Mumba.Api.Identity;
+
 
 namespace SamMiller.Mumba.Api
 {
