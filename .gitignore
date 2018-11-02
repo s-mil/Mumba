@@ -1,0 +1,5 @@
+**/bin
+**/obj
+Documentation/Proposal*
+!Documentation/Proposal.tex
+!Documentation/Proposal.pdf

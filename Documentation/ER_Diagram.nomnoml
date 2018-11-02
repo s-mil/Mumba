@@ -1,0 +1,41 @@
+[Comment |
+    Guid Id
+    DateTimeOffset TimeCreated
+    String Text
+]
+
+[Task |
+    Guid Id
+    String Title
+    String Description
+    DateTimeOffset DueDate
+]
+[Task] +- [<note>Has Many Comments]
+[<note>Has Many Comments] -> [Comment]
+
+[List |
+    Guid Id
+    String Title
+    Int BoardPosition
+]
+[List] +- [<note>Has Many Tasks]
+[<note>Has Many Tasks] -> [Task]
+
+[Board |
+    Guid Id
+    String Title
+]
+[Board] +- [<note>Has Many Lists]
+[<note>Has Many Lists] -> [List]
+
+[User |
+    Guid Id
+    String Username
+    String PasswordHash
+]
+[User] +- [<note>Owner Of Comment]
+[<note>Owner Of Comment] -> [Comment]
+[User] +- [<note>Owner Of Board]
+[<note>Owner Of Board] -> [Board]
+[User] +- [<note>Assigned To]
+[<note>Assigned To] -> [Task]
