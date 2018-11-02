@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SamMiller.Mumba.Api.Identity.Entities;
 
-namespace SamMiller.Mumba.Api.Identity.Data
+namespace SamMiller.Mumba.Api.Infrastructure.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
