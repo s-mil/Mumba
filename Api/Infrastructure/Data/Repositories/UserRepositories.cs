@@ -1,6 +1,6 @@
 namespace SamMiller.Mumba.Api.Infrastructure.Data.Repositories
 {
-    public class UserRepositories
+    public class UserRepository
     {
 
     }
