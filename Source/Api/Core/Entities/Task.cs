@@ -1,7 +1,15 @@
 namespace SamMiller.Mumba.Api.Core.Entities
 {
-    public class Task
+    public class Task : IEntity<Guid>
     {
-        public string Title {get; set;}
+        public Guid ID { get; private set; }
+        public string Title { get; private set; }
+
+        public Task(Guid id, string title)
+        {
+            ID = id;
+            Title = title;
+        }
+
     }
 }
