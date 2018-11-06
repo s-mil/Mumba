@@ -1,4 +1,5 @@
 using System;
+
 using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
 
@@ -7,7 +8,7 @@ namespace SamMiller.Mumba.Api.Core.Entities
 {
     public class List : IEntity<Guid>
     {
-        public Guid ID { get; private set; }
+        public Guid Id { get; private set; }
 
         public string Name {get; private set;}
 
@@ -15,7 +16,7 @@ namespace SamMiller.Mumba.Api.Core.Entities
         {
             Guard.Against.Null(name, nameof(name));
 
-            ID = id;
+            Id = id;
             Name = name;
         }
     }

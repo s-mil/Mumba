@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace SamMiller.Mumba.Api.Core.Entities
 {
-    public class Task : IEntity<Guid>
+    public class TaskItem : IEntity<Guid>
     {
-        public Guid ID { get; private set; }
+        public Guid Id { get; private set; }
         public string Title { get; private set; }
 
-        public Task(Guid id, string title)
+        public TaskItem(Guid id, string title)
         {
-            ID = id;
+            Id = id;
             Title = title;
         }
 

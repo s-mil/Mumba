@@ -1,22 +1,24 @@
 ﻿using System;
+using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using Ardalis.GuardClauses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SamMiller.Mumba.Api.Infrastructure.Identity;
-using SamMiller.Mumba.doApi.Core.Entities;
+using SamMiller.Mumba.Api.Core.Entities;
 
 namespace SamMiller.Mumba.Api.Infrastructure.Data.Repositories
 {
     public class UserRepository
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly AppDbContext _appDbContext;
-        public UserRepository(UserManager<AppUser> userManager, AppDbContext appDbContext)
+
+        public UserRepository(UserManager<User> userManager, AppDbContext AppDbContext)
         {
             _userManager = userManager;
-            _appDbContext = appDbContext;
+            _appDbContext = AppDbContext;
         }
 
         public async Task CreateAsync(string username, string password)
@@ -24,7 +26,7 @@ namespace SamMiller.Mumba.Api.Infrastructure.Data.Repositories
             Guard.Against.Null(username, nameof(username));
             Guard.Against.Null(password, nameof(password));
 
-            var NewAppUser = new AppUser
+            var NewAppUser = new User
             {
                 UserName = username
             };
@@ -49,8 +51,8 @@ namespace SamMiller.Mumba.Api.Infrastructure.Data.Repositories
             }
             catch (DbUpdateConcurrencyException exception)
             {
-                var AppUser = await _userManager.FindByNameAsync(username);
-                await _userManager.DeleteAsync(AppUser);
+                var User = await _userManager.FindByNameAsync(username);
+                await _userManager.DeleteAsync(User);
 
                 throw new CreateUserException($"The username '{username}' is already in use.", exception);
             }

@@ -1,8 +1,19 @@
-namespace SamMiller.Mumba.doApi.Core.Entities
+using System;
+
+
+namespace SamMiller.Mumba.Api.Core.Entities
 {
-    public class User
+    public class User : IEntity<Guid>
     {
-       public string username { get; set; }
+        public Guid Id { get; private set; }
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public User(Guid id, string username, string password)
+        {
+            Id = id;
+            Username = username;
+            Password = password;
+        }
 
     }
 }

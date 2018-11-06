@@ -7,14 +7,23 @@ namespace SamMiller.Mumba.Api.Controllers
 {
     [ApiController]
     [Route("api/account")]
-    public class AccountController : ControllerBase
+    public class AccountController : ApiControllerBase
     {
+
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="registerUserRequest"></param>
+        /// <param name="userRepository"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserRequest model, [FromServices] UserRepository userRepository)
+        [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public async Task<IActionResult> RegisterUserAsync([FromBody] RegisterUserRequest registerUserRequest, [FromServices] UserRepository userRepository)
         {
             try
             {
-                await userRepository.CreateAsync(model.Username, model.Password);
+                await userRepository.CreateAsync(registerUserRequest.Username, registerUserRequest.Password);
 
                 return Ok();
             }

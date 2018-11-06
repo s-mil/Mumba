@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using SamMiller.Mumba.doApi.Core.Entities;
+using SamMiller.Mumba.Api.Core.Entities;
 
 namespace SamMiller.Mumba.Api.Infrastructure.Data
 {
