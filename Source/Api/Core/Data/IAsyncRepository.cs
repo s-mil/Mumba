@@ -19,7 +19,7 @@ namespace SamMiller.Mumba.Api.Core.Data
         Task<T> GetByIdAsync(TKey id);
 
         /// <summary>
-        /// The task to list all IEnumerables in the repository
+        /// The task to list all IEnumerable(s) in the repository
         /// </summary>
         /// <returns></returns>       
         Task<IEnumerable<T>> ListAllAsync();
