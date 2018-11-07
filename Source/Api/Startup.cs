@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.DependencyInjection;
-using SamMiller.Mumba.Api.Infrastructure.Identity;
-
+using SamMiller.Mumba.Api.Infrastructure.Data;
+using SamMiller.Mumba.Api.Core.Entities;
 
 namespace SamMiller.Mumba.Api
 {
@@ -16,12 +16,12 @@ namespace SamMiller.Mumba.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddDbContext<IdentityDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseInMemoryDatabase(nameof(IdentityDbContext));
+                options.UseInMemoryDatabase(nameof(AppDbContext));
             });
 
-            services.AddIdentityCore<IdentityUser>(options =>
+            services.AddIdentityCore<User>(options =>
             {
                 options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 8;
