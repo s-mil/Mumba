@@ -6,6 +6,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.DependencyInjection;
 using SamMiller.Mumba.Api.Infrastructure.Data;
 using SamMiller.Mumba.Api.Core.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace SamMiller.Mumba.Api
 {
@@ -35,11 +36,13 @@ namespace SamMiller.Mumba.Api
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
 
-            });
+            }).AddEntityFrameworkStores<AppDbContext>()
+                .AddDefaultTokenProviders();
+
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = nameof(Mumba.Api), Version = "v1" });
             });
         }
 
@@ -66,7 +69,7 @@ namespace SamMiller.Mumba.Api
            app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Mumba.Api)+ " v1");
             });
 
             app.UseMvc();
