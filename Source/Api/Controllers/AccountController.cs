@@ -11,6 +11,7 @@ namespace SamMiller.Mumba.Api.Controllers
     /// </summary>
     [ApiController]
     [Route("api/account")]
+    
     public class AccountController : ApiControllerBase
     { }
 }
