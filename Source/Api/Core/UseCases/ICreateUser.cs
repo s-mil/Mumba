@@ -13,7 +13,6 @@ namespace SamMiller.Mumba.Api.Core.UseCases
         /// </summary>
         /// <param name="username">The users username</param>
         /// <param name="password">The users password</param>
-        /// <returns></returns>
         Task<(bool Succeeded, IEnumerable<string> Errors)> HandleAsync(string username, string password);
     }
 }
