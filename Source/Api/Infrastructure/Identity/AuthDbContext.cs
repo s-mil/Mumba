@@ -1,10 +1,13 @@
-
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 
 namespace SamMiller.Mumba.Api.Infrastructure.Identity
 {
+    /// <summary>
+    /// The definition of a DB context for the Auth User
+    /// </summary>
+    /// <typeparam name="AuthUser"></typeparam>
     public class AuthDbContext : IdentityUserContext<AuthUser>
     {
         /// <summary>
