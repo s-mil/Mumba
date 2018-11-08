@@ -1,14 +1,14 @@
 
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SamMiller.Mumba.Api.Core.Entities;
+
 
 namespace SamMiller.Mumba.Api.Infrastructure.Identity
 {
-    public class AuthDbContext : IdentityUserContext<User>
+    public class AuthDbContext : IdentityUserContext<AuthUser>
     {
         /// <summary>
-        /// Creates a new instance.
+        /// Creates a new db instance.
         /// </summary>
         /// <param name="options">The db context options.</param>
         public AuthDbContext(DbContextOptions<AuthDbContext> options) : base(options)

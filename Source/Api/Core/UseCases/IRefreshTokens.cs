@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using SamMiller.Mumba.Api.Core.Entities;
+using SamMiller.Mumba.Api.Infrastructure.Identity;
 
 namespace SamMiller.Mumba.Api.Core.UseCases
 {
