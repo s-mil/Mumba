@@ -1,14 +1,14 @@
 using System;
 
-namespace SamMiller.Mumba.Api.Core.Entities
+namespace SamMiller.Mumba.Api.Infrastructure.Identity
 {
     /// <summary>
-    /// The class that defines an AccessToken entity
+    /// The class that defines an AccessToken
     /// </summary>
     public class AccessToken
     {
         /// <summary>
-        /// The Token 
+        /// The Token string
         /// </summary>
         /// <value></value>
         public string Token { get; set; }
@@ -17,6 +17,6 @@ namespace SamMiller.Mumba.Api.Core.Entities
         /// The expiration time for access tokens
         /// </summary>
         /// <value></value>
-        public DateTimeOffset ExpirationTime { get; set; }
+        public DateTimeOffset Expires { get; set; }
     }
 }
