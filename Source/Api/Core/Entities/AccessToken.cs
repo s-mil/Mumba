@@ -3,7 +3,7 @@ using System;
 namespace SamMiller.Mumba.Api.Core.Entities
 {
     /// <summary>
-    /// The class that defines a AccessToken entity
+    /// The class that defines an AccessToken entity
     /// </summary>
     public class AccessToken
     {
