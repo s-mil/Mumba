@@ -12,10 +12,10 @@ using Microsoft.IdentityModel.Tokens;
 namespace SamMiller.Mumba.Api.Infrastructure.Identity
 {
 
-/// <summary>
-/// Commands for modifying Application Users.
-/// </summary>
-public class AuthUserService : IAuthUserService
+    /// <summary>
+    /// Commands for modifying Application Users.
+    /// </summary>
+    public class AuthUserService : IAuthUserService
     {
         private readonly UserManager<AuthUser> _userManager;
 
@@ -68,6 +68,11 @@ public class AuthUserService : IAuthUserService
             var accessToken = GenerateAccessToken(username);
 
             var refreshToken = GenerateRefreshToken(username, ipAddress);
+
+            if (user.RefreshTokens == null)
+            {
+                user.RefreshTokens = new System.Collections.Generic.List<RefreshToken>();
+            }
 
             user.RefreshTokens.Add(refreshToken);
 
