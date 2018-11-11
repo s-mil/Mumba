@@ -7,6 +7,10 @@ namespace SamMiller.Mumba.Models
 {
     public class AppUser : IdentityUser
     {
+        public AppUser()
+        {
+        }
+
         public string UserName { get; set; }
 
 
