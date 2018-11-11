@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using SamMiller.Mumba.Models;
+using SamMiller.Mumba.Models.AccountViewModels;
 
 namespace SamMiller.Mumba.Controllers
 {
