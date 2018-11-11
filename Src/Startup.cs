@@ -5,21 +5,41 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using SamMiller.Mumba.Data;
+using SamMiller.Mumba.Models;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Src
 {
     public class Startup
     {
+        private IHostingEnvironment _hostingEnvironment { get; set; }
+
+        private IConfiguration _configuration { get; set; }
+
+        /// <summary>
+        /// Creates a new instance of this class
+        /// </summary>
+        /// <param name="env">The hosting environment</param>
+        /// <param name="config">The configuration settings for the application</param>
+        public Startup(IHostingEnvironment env, IConfiguration config)
+        {
+            _hostingEnvironment = env;
+            _configuration = config;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
 
-            services.AddDbContext<GoldenTicketContext>(options => options.UseSqlite(_configuration["connectionString"]));
+            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["connectionString"]));
 
-            services.AddIdentity<Technician, IdentityRole>().AddEntityFrameworkStores<GoldenTicketContext>().AddDefaultTokenProviders();
+            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -40,10 +60,16 @@ namespace Src
                 app.UseDeveloperExceptionPage();
             }
 
-            app.Run(async (context) =>
+            app.UseAuthentication();
+
+            app.UseMvc(routes =>
             {
-                await context.Response.WriteAsync("Hello World!");
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Boards}/{action=All}/{id?}"
+                );
             });
+
         }
     }
 }
