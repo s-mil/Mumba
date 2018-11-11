@@ -7,7 +7,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/Api/Api.csproj"
+                "${workspaceFolder}/Src/Mumba.csproj"
             ],
             "problemMatcher": "$msCompile"
         }
