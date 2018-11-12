@@ -1,5 +1,5 @@
 **/bin
 **/obj
 Documentation/Proposal*
-!Documentation/Proposal.tex
-!Documentation/Proposal.pdf
+!Documentation/Proposal/Proposal.tex
+!Documentation/Proposal/Proposal.pdf
