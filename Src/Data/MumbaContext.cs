@@ -1,11 +1,11 @@
+using SamMiller.Mumba.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using SamMiller.Mumba.Models;
 
 namespace SamMiller.Mumba.Data
 {
     /// <summary>
-    /// The context for the GoldenTicket Api
+    /// The context for the Mumba Api
     /// </summary>
     public class MumbaContext : IdentityDbContext<AppUser>
     {

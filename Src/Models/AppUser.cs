@@ -11,7 +11,7 @@ namespace SamMiller.Mumba.Models
         {
         }
 
-        public string UserName { get; set; }
+
 
 
     }
