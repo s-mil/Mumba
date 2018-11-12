@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SamMiller.Mumba.Data;
 using SamMiller.Mumba.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -24,10 +25,21 @@ namespace SamMiller.Mumba.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Gets all technicians
+        /// </summary>
+        /// <returns>A list of all technicians</returns>
+        [HttpGet]
+        public async Task<IActionResult> All()
+        {
+            var Boards = await _context.Boards.ToListAsync();
+            return View(Boards);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
-             var boards = await _context.Boards;
+             var boards = _context.Boards;
 
             return View(boards);
         }

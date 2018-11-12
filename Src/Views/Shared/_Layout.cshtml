@@ -20,7 +20,7 @@
 <body>
     <nav class="purple darken-4">
         <div class="nav-wrapper purple darken-4 container">
-            <a class="brand-logo hide-on-med-and-down"><strong class="amber-text text-darken-2"> The Golden Ticket</strong> </a>
+            <a class="brand-logo hide-on-med-and-down"><strong class="text-darken-2">Mumba</strong> </a>
             <ul class="right amber-text text-darken-2">
                 @if (SignInManager.IsSignedIn(User)) {
                 <li class="nav-item amber-text text-darken-2" >
@@ -37,11 +37,9 @@
                 </li>
                 }
                 <li>
-                    <a asp-controller="Tickets" asp-action="All">Tickets</a>
+                    <a asp-controller="Boards" asp-action="All">Tickets</a>
                 </li>
-                <li>
-                    <a asp-controller="Reports" asp-action="All">Reports</a>
-                </li>
+
                 }
             </ul>
         </div>

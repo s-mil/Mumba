@@ -12,7 +12,7 @@ using SamMiller.Mumba.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace Src
+namespace SamMiller.Mumba
 {
     public class Startup
     {

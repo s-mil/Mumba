@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "Register";
+}
+@using SamMiller.Mumba.Models.AccountViewModels
+@model NewAppUser
+
+<form method="post">
+    <label>Name</label>
+    <input asp-for="Name">
+    <label>Username</label>
+    <input asp-for="Username">
+    <label>Email</label>
+    <input asp-for="Email">
+    <label>Password</label>
+    <input asp-for="Password">
+    <button class="btn" type="submit">
+        Register
+    </button>
+</form>

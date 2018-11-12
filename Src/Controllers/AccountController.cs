@@ -14,7 +14,6 @@ namespace SamMiller.Mumba.Controllers
     public class AccountController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
-
         private readonly ILogger _logger;
 
         /// <summary>
@@ -76,12 +75,13 @@ namespace SamMiller.Mumba.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(BoardsController.All), "Tickets");
+                    return RedirectToAction(nameof(BoardsController), "Tickets");
                 }
             }
 
             return View(loginRequest);
         }
+
 
         /// <summary>
         /// Denies access
