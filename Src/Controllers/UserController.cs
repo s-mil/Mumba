@@ -42,8 +42,8 @@ namespace SamMiller.Mumba.Controllers
                 Email = newAppUser.Email,
             };
             await _userManager.CreateAsync(AppUser, newAppUser.Password);
-          
-            return RedirectToAction(BoardsController.All);
+            return null;
+            ///return RedirectToAction(nameof(All));
         }
     }
 }
