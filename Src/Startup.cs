@@ -44,7 +44,7 @@ namespace SamMiller.Mumba
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["connectionString"]));
+            services.AddDbContext<MumbaContext>(options => options.UseInMemoryDatabase(_configuration["connectionString"]));
 
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
