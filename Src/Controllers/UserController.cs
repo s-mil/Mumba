@@ -35,13 +35,14 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <returns>The add user view</returns>
         [HttpPost]
-        public async Task<IActionResult> AddUser([FromForm]NewAppUser newAppUser)
+        public async Task<IActionResult> AddUser([FromForm] NewAppUser newAppUser)
         {
            
             var appUser = new AppUser
             {
+                
                 UserName = newAppUser.UserName,
-                Email = newAppUser.Email,
+                Email = newAppUser.Email
             };
             await _userManager.CreateAsync(appUser, newAppUser.Password);
             
