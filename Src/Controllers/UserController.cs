@@ -5,6 +5,7 @@ using SamMiller.Mumba.Data;
 using SamMiller.Mumba.Models;
 using SamMiller.Mumba.Models.AccountViewModels;
 
+
 namespace SamMiller.Mumba.Controllers
 {
     public class UserController : Controller
@@ -24,26 +25,27 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <returns>The add user view</returns>
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult AddUser()
         {
             return View();
         }
 
         /// <summary>
-        /// Adds a technician
+        /// Adds a User
         /// </summary>
-        /// <returns>The technician list</returns>
+        /// <returns>The add user view</returns>
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] NewAppUser newAppUser)
+        public async Task<IActionResult> AddUser([FromForm]NewAppUser newAppUser)
         {
-            var AppUser = new AppUser
+           
+            var appUser = new AppUser
             {
                 UserName = newAppUser.UserName,
                 Email = newAppUser.Email,
             };
-            await _userManager.CreateAsync(AppUser, newAppUser.Password);
-            return null;
-            ///return RedirectToAction(nameof(All));
+            await _userManager.CreateAsync(appUser, newAppUser.Password);
+            
+            return RedirectToAction("Login","Account");
         }
     }
 }
