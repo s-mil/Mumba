@@ -37,6 +37,13 @@ namespace SamMiller.Mumba
         {
             services.AddMvc();
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+
             services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["connectionString"]));
 
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
@@ -59,7 +66,12 @@ namespace SamMiller.Mumba
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            else{
+                app.UseHsts();
+            }
+            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

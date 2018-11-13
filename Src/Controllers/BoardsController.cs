@@ -33,7 +33,7 @@ namespace SamMiller.Mumba.Controllers
         public async Task<IActionResult> All()
         {
             var Boards = await _context.Boards.ToListAsync();
-            return View(Boards);
+            return View();
         }
 
         [HttpGet]
@@ -41,7 +41,7 @@ namespace SamMiller.Mumba.Controllers
         {
              var boards = _context.Boards;
 
-            return View(boards);
+            return View();
         }
     }
 }
