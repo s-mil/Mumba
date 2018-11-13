@@ -5,11 +5,6 @@
 @using System.Collections.Generic
 @model IEnumerable<Board>
 
-@if ((bool)ViewData["includeClosed"]) {
-    <a asp-action="All">Exclude Closed Tickets</a>
-} else {
-    <a asp-action="All" asp-route-includeClosed="true">Include Closed Tickets</a>
-}
   @foreach (var board in Model) {
 
  <div class="row">
