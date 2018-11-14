@@ -1,6 +1,7 @@
 using SamMiller.Mumba.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace SamMiller.Mumba.Data
 {
