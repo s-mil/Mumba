@@ -10,7 +10,9 @@ namespace SamMiller.Mumba.Models.BoardViewModels
         /// </summary>
         public AppUser user { get; set; }
 
-        
+        /// <summary>
+        /// Gets board
+        /// </summary>
         public Board board {get; set;}
 
         /// <summary>
