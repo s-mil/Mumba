@@ -1,0 +1,13 @@
+@using SamMiller.Mumba.Models
+@model Board
+@{
+    ViewData["Title"] = "Add Board";
+}
+
+<form method="post">
+    <label>Title of Board:</label>
+    <input asp-for="Title" placeholder="Title">
+    <button class="btn" type="submit">
+        Register
+    </button>
+</form>
