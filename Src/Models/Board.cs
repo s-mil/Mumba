@@ -18,11 +18,23 @@ namespace SamMiller.Mumba.Models
         /// <summary>
         /// The ID of the owner of the board
         /// </summary>
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// The title for the board
         /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// Constructor for new boards
+        /// </summary>
+        /// <param name="uId">The user ID of the person requesting a new board</param>
+        /// <param name="title">The title of the board</param>
+        public Board(string uId, string title)
+        {
+            Id = new System.Guid();
+            UserId = uId;
+            Title = title;
+        }
     }
 }
