@@ -21,13 +21,17 @@
     <nav class="purple darken-4">
         <div class="nav-wrapper purple darken-4 container">
             <a class="brand-logo hide-on-med-and-down"><strong class="text-darken-2">Mumba</strong> </a>
-            <ul class="right amber-text text-darken-2">
+            <ul class="right">
                 @if (SignInManager.IsSignedIn(User)) {
-                <li class="nav-item amber-text text-darken-2" >
-                    Hello @UserManager.GetUserName(User)!
+               
+                <li class="nav-item cyan-text">
+                    <a asp-controller="Boards" asp-action="Add">Add Board</a>
                 </li>
                 <li class="nav-item amber-text text-darken-2">
-                    <a asp-controller="Account" asp-action="Logout">Log out</a>
+                    <a asp-controller="Account" asp-action="Logout">Log Out</a>
+                </li>
+                 <li class="nav-item " >
+                    Hello @UserManager.GetUserName(User)!
                 </li>
                 } 
                 else 
