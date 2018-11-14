@@ -33,15 +33,44 @@ namespace SamMiller.Mumba.Controllers
         public async Task<IActionResult> All()
         {
             var Boards = await _context.Boards.ToListAsync();
+            return View(Boards);
+        }
+        /// <summary>
+        /// Opens a board
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Open()
+        {
+            var boards = await _context.Boards.ToListAsync();
+            var tasks = _context.Tasks.ToListAsync();
             return View();
         }
 
+        /// <summary>
+        /// Serves the add board page
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public IActionResult Add()
         {
-             var boards = _context.Boards;
-
             return View();
+        }
+        /// <summary>
+        /// Handles the creation of a new board
+        /// </summary>
+        /// <param name="board"> A board construct</param>
+        /// <param name="signInManager">The currently active user</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Add([FromForm] Board board, [FromServices] SignInManager<AppUser> signInManager)
+        {
+            Board newBoard = new Board(((await _userManager.GetUserAsync(User)).Id), board.Title);
+
+            await _context.AddAsync(newBoard);
+            return View("All");
+
+
         }
     }
 }
