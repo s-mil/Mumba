@@ -75,10 +75,10 @@ namespace SamMiller.Mumba.Controllers
                 }
                 else
                 {
-                    return RedirectToAction(nameof(BoardsController), "Tickets");
+                    return RedirectToAction("All","Boards" );
                 }
             }
-
+          
             return View(loginRequest);
         }
 
