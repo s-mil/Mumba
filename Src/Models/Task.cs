@@ -18,7 +18,7 @@ namespace SamMiller.Mumba.Models
         /// <summary>
         /// The Id for the client who owns this ticket
         /// </summary>
-        public Guid BoardId { get; set; }
+        public string BoardId { get; set; }
 
         /// <summary>
         /// The list position (1-3) of this task on the board
