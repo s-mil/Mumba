@@ -14,6 +14,6 @@ namespace SamMiller.Mumba.Models.BoardViewModels
         /// List of Boards associated with the user
         /// </summary>
         /// <returns>Users boards</returns>
-        public IEnumerable<Board> Boards { get; set; }
+        public IEnumerable<Board> Board { get; set; }
     }
 }
