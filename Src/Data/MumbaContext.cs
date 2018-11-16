@@ -10,10 +10,6 @@ namespace SamMiller.Mumba.Data
     /// </summary>
     public class MumbaContext : IdentityDbContext<AppUser>
     {
-        /// <summary>
-        /// The collection of Users
-        /// </summary>
-        public DbSet<AppUser> Users { get; set; }
 
         /// <summary>
         /// The collection of boards
