@@ -1,59 +1,82 @@
-@using Microsoft.AspNetCore.Identity 
+@using Microsoft.AspNetCore.Identity
 @using SamMiller.Mumba.Models
 @using SamMiller.Mumba.Data
-@inject SignInManager<AppUser> SignInManager 
-@inject UserManager<AppUser> UserManager
+@inject SignInManager<AppUser> SignInManager
+    @inject UserManager<AppUser> UserManager
 
-<!DOCTYPE html>
-<html lang="en">
+        <!DOCTYPE html>
+        <html lang="en">
 
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@ViewData["Title"] - Mumba</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css" media="screen,projection"/>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> 
-    @RenderSection("Style", required: false)
-</head>
+        <head>
+            <!-- Favicon -->
+            <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+            <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+            <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+            <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+            <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+            <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+            <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+            <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+            <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+            <link rel="icon" type="image/png" sizes="192x192" href="/android-icon-192x192.png">
+            <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+            <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+            <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+            <link rel="manifest" href="/manifest.json">
+            <meta name="msapplication-TileColor" content="#ffffff">
+            <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+            <meta name="theme-color" content="#ffffff">
+            <!-- Favicon -->
+            
+            <meta charset="utf-8" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <title>@ViewData["Title"] - Mumba</title>
+            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
+                media="screen,projection" />
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            @RenderSection("Style", required: false)
+        </head>
 
-<body>
-    <nav class="purple darken-4">
-        <div class="nav-wrapper purple darken-4 container">
-            <a class="brand-logo hide-on-med-and-down"><strong class="text-darken-2">Mumba</strong> </a>
-            <ul class="right">
-                @if (SignInManager.IsSignedIn(User)) {
-               
-                <li class="nav-item cyan-text">
-                    <a asp-controller="Boards" asp-action="Add">Add Board</a>
-                </li>
-                <li class="nav-item amber-text text-darken-2">
-                    <a asp-controller="Account" asp-action="Logout">Log Out</a>
-                </li>
-                 <li class="nav-item " >
-                    Hello @UserManager.GetUserName(User)!
-                </li>
-                } 
-                else 
-                {
-                <li class="nav-item amber-text text-darken-2">
-                    <a asp-controller="Account" asp-action="Login">Log in</a>
-                </li>
-                <li>
-                    <a asp-controller="User" asp-action="AddUser">Register</a>
-                </li>
+        <body>
+            <nav class="purple darken-4">
+                <div>
+                    <a class="brand-logo center"><strong class="text-darken-2">Mumba</strong> </a>
+                    <ul class="right">
+                        @if (SignInManager.IsSignedIn(User)) {
 
-                }
-            </ul>
-        </div>
-    </nav>
-    <main class="container">
-        <h1 id="Title">@ViewData["Title"]</h1>
-        @RenderBody()
-    </main>
+                        <li class="nav-item cyan-text">
+                            <a asp-controller="Boards" asp-action="Add">Add Board</a>
+                        </li>
+                        <li class="nav-item amber-text text-darken-2">
+                            <a asp-controller="Account" asp-action="Logout">Log Out</a>
+                        </li>
+                        <li class="nav-item ">
+                            Hello @UserManager.GetUserName(User)!
+                        </li>
+                        }
+                        else
+                        {
+                        <li class="nav-item amber-text text-darken-2">
+                            <a asp-controller="Account" asp-action="Login">Log in</a>
+                        </li>
+                        <li>
+                            <a asp-controller="User" asp-action="AddUser">Register</a>
+                        </li>
 
-    @RenderSection("Scripts", required: false)
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js" crossorigin=" anonymous "></script>
-</body>
+                        }
+                    </ul>
+                </div>
+            </nav>
 
-</html>
+            <main>
+                <h1 id="Title">@ViewData["Title"]</h1>
+                @RenderBody()
+            </main>
+
+            @RenderSection("Scripts", required: false)
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
+                crossorigin=" anonymous "></script>
+        </body>
+
+        </html>
