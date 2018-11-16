@@ -25,16 +25,6 @@ namespace SamMiller.Mumba.Models
         /// </summary>
         public string Title { get; set; }
 
-        /// <summary>
-        /// Constructor for new boards
-        /// </summary>
-        /// <param name="uId">The user ID of the person requesting a new board</param>
-        /// <param name="title">The title of the board</param>
-        public Board(string uId, string title)
-        {
-            Id = new System.Guid();
-            UserId = uId;
-            Title = title;
-        }
+
     }
 }
