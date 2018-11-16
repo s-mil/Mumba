@@ -7,16 +7,16 @@ namespace SamMiller.Mumba.Models.TaskViewModels
     public class TaskDetails
     {
         /// <summary>
+        /// The board the task belongs to
+        /// </summary>
+        /// <value>The board</value>
+        public Board Board { get; set; }
+        
+        
+        /// <summary>
         /// Gets the task
         /// </summary>
         /// <value>The task</value>
-        public Task task { get; set; }
-
-        /// <summary>
-        /// Gets the user
-        /// </summary>
-        /// <value>The user</value>
-        public AppUser user { get; set; }
-        
+        public Task task { get; set; }        
     }
 }
