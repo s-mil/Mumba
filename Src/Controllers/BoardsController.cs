@@ -22,7 +22,7 @@ namespace SamMiller.Mumba.Controllers
         private MumbaContext _context;
 
         private UserManager<AppUser> _userManager;
-        
+
         /// <summary>
         /// Initializes the private value _context
         /// </summary>
@@ -85,6 +85,47 @@ namespace SamMiller.Mumba.Controllers
             return RedirectToAction(nameof(All));
         }
 
+
+
+        /// <summary>
+        /// Serves the add task page
+        /// </summary>
+        /// <returns>The view of the add task page</returns>
+        [HttpGet]
+        public IActionResult AddTask([FromRoute]Guid id)
+        {
+            return View(new Models.Task { BoardId = id.ToString() });
+        }
+
+        /// <summary>
+        /// Handles the creation of a new board
+        /// </summary>
+        /// <param name="board"> A board construct</param>
+        /// <returns> A new board </returns>
+        [HttpPost]
+        public async Task<IActionResult> AddTask([FromForm] Board board)
+        {
+            _context.Boards.Add(board);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(All));
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditTask([FromRoute]Guid id)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+            return View(task);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditTask([FromForm] Models.Task task)
+        {
+            _context.Tasks.Update(task);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Open));
+        }
 
 
     }
