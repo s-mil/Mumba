@@ -7,6 +7,8 @@ using SamMiller.Mumba.Data;
 using SamMiller.Mumba.Models;
 using Microsoft.EntityFrameworkCore;
 using SamMiller.Mumba.Models.BoardViewModels;
+using System;
+using System.Linq;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -27,13 +29,14 @@ namespace SamMiller.Mumba.Controllers
         }
 
         /// <summary>
-        /// Gets all technicians
+        /// Gets all boards
         /// </summary>
         /// <returns>A list of all technicians</returns>
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            var Boards = await _context.Boards.ToListAsync();
+            string uId =  _userManager.GetUserAsync(User).Id.ToString();
+            var Boards = await _context.Boards.Where(Board => Board.UserId == uId ).ToListAsync();
             return View(Boards);
         }
         /// <summary>
@@ -41,10 +44,10 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public async Task<IActionResult> Open()
+        public async Task<IActionResult> Open([FromRoute] Guid id)
         {
-            var boards = await _context.Boards.ToListAsync();
-            var tasks = await _context.Tasks.ToListAsync();
+            var board = await _context.Boards.FindAsync(id);
+            var tasks = await _context.Tasks.Where(task => task.BoardId == id.ToString()).ToListAsync();
             return View(model: new BoardView{Tasks = tasks});
         }
 
