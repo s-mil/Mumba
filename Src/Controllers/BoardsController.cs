@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using SamMiller.Mumba.Data;
 using SamMiller.Mumba.Models;
 using Microsoft.EntityFrameworkCore;
+using SamMiller.Mumba.Models.BoardViewModels;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -43,8 +44,8 @@ namespace SamMiller.Mumba.Controllers
         public async Task<IActionResult> Open()
         {
             var boards = await _context.Boards.ToListAsync();
-            var tasks = _context.Tasks.ToListAsync();
-            return View();
+            var tasks = await _context.Tasks.ToListAsync();
+            return View(model: new BoardView{Tasks = tasks});
         }
 
         /// <summary>
@@ -54,22 +55,20 @@ namespace SamMiller.Mumba.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            return View(new Board {UserId = _userManager.GetUserAsync(User).Id.ToString()});
         }
         /// <summary>
         /// Handles the creation of a new board
         /// </summary>
         /// <param name="board"> A board construct</param>
-        /// <param name="signInManager">The currently active user</param>
         /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> Add([FromForm] Board board, [FromServices] SignInManager<AppUser> signInManager)
+        public async Task<IActionResult> Add([FromForm] Board board)
         {
-            Board newBoard = new Board(((await _userManager.GetUserAsync(User)).Id), board.Title);
-
-            await _context.AddAsync(newBoard);
-            return View("All");
-
+                        
+             _context.Boards.Add(board);
+             await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(All));
 
         }
     }
