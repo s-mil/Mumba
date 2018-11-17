@@ -1,0 +1,28 @@
+@using SamMiller.Mumba.Models
+@model SamMiller.Mumba.Models.Task
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<div class="container">
+<form method="post">
+    <input asp-for="Title" placeholder="Title" Model.Title required>
+    <input hidden asp-for="Id" Model.Id>
+    <input hidden asp-for="BoardId" Model.BoardId>
+    <input asp-for="Description" Model.Description>
+    <select class="browser-default" asp-for="ListNum"required Model.ListNum>
+      <option value="" disabled>Choose the starting list for this task</option>
+      <option value="1">To Do</option>
+      <option value="2">In Progress</option>
+      <option value="3">Done</option>
+    </select>
+    <button asp-route-id="Model.BoardId" class="btn" type="submit">
+       Update
+    </button>
+</form>
+</div>
+
+
+<script>  $(document).ready(function() {
+    M.updateTextFields();
+  });</script>

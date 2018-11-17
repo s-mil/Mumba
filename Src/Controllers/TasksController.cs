@@ -75,12 +75,23 @@ namespace SamMiller.Mumba.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit([FromForm] Models.Task task)
+        public async Task<IActionResult> Edit([FromForm] Models.Task taskUpdate)
         {
+            var task = await _context.Tasks.FindAsync(taskUpdate.Id);
+
+            task.Title=taskUpdate.Title;
+            task.Description= taskUpdate.Description;
+            task.DueDate = taskUpdate.DueDate;
+            task.ListNum=taskUpdate.ListNum;
+
+
+            var routeValues = new RouteValueDictionary {
+               {"id", task.Id.ToString()}
+           };
             _context.Tasks.Update(task);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Open));
+            return RedirectToAction(nameof(Open),"Tasks", routeValues);
         }
 
     }
