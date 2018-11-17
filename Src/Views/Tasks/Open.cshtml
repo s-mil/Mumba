@@ -1,0 +1,23 @@
+@using SamMiller.Mumba.Models
+@using System.Collections.Generic
+@model SamMiller.Mumba.Models.TaskViewModels.TaskDetails
+@{
+    ViewData["Title"] = "Task: " + Model.Task.Title;
+}
+
+   <div class="fixed-action-btn">
+    <a asp-action=Edit asp-controller="Tasks" asp-route-id="@Model.Task.Id" class="btn-floating btn-large waves-effect waves-light yellow"><i class="large material-icons">edit</i></a>
+   </div>
+
+<div class="container">
+<ul class="collection">
+    <li class="collection-item avatar">
+        <span class="title"><h3>Description</h3></span>
+        <p> @Model.Task.Description</p>
+    </li>
+    <li class="collection-item avatar">
+        <span class="title"><h3>Due Date</h3></span>
+        <p> @Model.Task.DueDate.ToString() </p>
+    </li>
+</ul>
+</div>

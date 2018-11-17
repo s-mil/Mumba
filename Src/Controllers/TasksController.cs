@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using Microsoft.AspNetCore.Routing;
+using SamMiller.Mumba.Models.TaskViewModels;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -30,9 +31,13 @@ namespace SamMiller.Mumba.Controllers
         }
 
         [HttpGet]
-        public IActionResult Open()
-        {
-            return View();
+        public async Task<IActionResult> Open([FromRoute]Guid id)
+        {   
+            
+            var task = await _context.Tasks.FindAsync(id);
+            var boadId = Guid.Parse(task.BoardId);
+            var board = await _context.Boards.FindAsync(boadId);
+            return View(model: new TaskDetails { Task = task, Board=board});
         }
 
         /// <summary>

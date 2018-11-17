@@ -17,6 +17,6 @@ namespace SamMiller.Mumba.Models.TaskViewModels
         /// Gets the task
         /// </summary>
         /// <value>The task</value>
-        public Task task { get; set; }        
+        public Task Task { get; set; }        
     }
 }
