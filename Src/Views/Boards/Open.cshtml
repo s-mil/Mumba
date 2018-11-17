@@ -31,7 +31,7 @@ ViewData["Title"] = $"{Model.Board.Title}" ;
             <li class="collection-item">
                 <span class="title">@task.Title</span>
                 <p>@task.Description</p>
-                <a asp-action=OpenTask asp-route-id=@task.Id class="secondary-content"><i class="material-icons">send</i></a>
+                <a asp-controller="Tasks" asp-action="Open" asp-route-id="@task.Id" class="secondary-content"><i class="material-icons">send</i></a>
             </li>
         }
     </ul>
@@ -43,7 +43,7 @@ ViewData["Title"] = $"{Model.Board.Title}" ;
             <li class="collection-item">
                 <span class="title center">@task.Title</span>
                 <p>@task.Description</p>
-                <a asp-action=OpenTask asp-route-id=@task.Id class="secondary-content"><i class="material-icons">send</i></a>
+                <a asp-controller="Tasks" asp-action="Open" asp-route-id="@task.Id" class="secondary-content"><i class="material-icons">send</i></a>
             </li>
         }
     </ul>
