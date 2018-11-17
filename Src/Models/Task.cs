@@ -16,7 +16,7 @@ namespace SamMiller.Mumba.Models
         public Guid Id { get; set; }
 
         /// <summary>
-        /// The Id for the client who owns this ticket
+        /// The Id for the board associated with this task
         /// </summary>
         public string BoardId { get; set; }
 
