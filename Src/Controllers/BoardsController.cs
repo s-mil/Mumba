@@ -54,10 +54,9 @@ namespace SamMiller.Mumba.Controllers
         public async Task<IActionResult> Open([FromRoute] Guid id)
         {
             var board = await _context.Boards.FindAsync(id);
-            var tasks = await _context.Tasks.Where(task => task.BoardId == id.ToString()).ToListAsync();
-            var t1 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Union(tasks.Where(task => task.ListNum == 1)).ToListAsync();
-            var t2 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Union(tasks.Where(task => task.ListNum == 2)).ToListAsync();
-            var t3 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Union(tasks.Where(task => task.ListNum == 3)).ToListAsync();
+            var t1 =  await _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==1)).ToListAsync();
+            var t2 = await  _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==2)).ToListAsync();
+            var t3 = await  _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==3)).ToListAsync();
 
             return View(model: new BoardView { Board = board, TaskL1 = t1, TaskL2 = t2, TaskL3 = t3 });
         }
