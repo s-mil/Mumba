@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Collections;
+using Microsoft.AspNetCore.Routing;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -52,10 +53,12 @@ namespace SamMiller.Mumba.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Models.Task task)
         {
-            
-            _context.Tasks.Add(task);
+           var routeValues = new RouteValueDictionary {
+               {"id", task.BoardId}
+           };
+            _context.Tasks.Add(new Models.Task { Title = task.Title, Description=task.Description, BoardId=task.BoardId.ToString(), ListNum=task.ListNum});
             await _context.SaveChangesAsync();
-            return RedirectToAction("Open","Boards",task.BoardId);
+            return RedirectToAction("Open","Boards", routeValues );
         }
 
 
