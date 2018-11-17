@@ -20,4 +20,5 @@
         <p> @Model.Task.DueDate.ToString() </p>
     </li>
 </ul>
+<a asp-action=Open asp-controller=Boards asp-route-id="@Model.Board.Id" class="btn-large waves-effect" >Return to Board</a>
 </div>
