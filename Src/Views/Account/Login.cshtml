@@ -1,8 +1,10 @@
 @using SamMiller.Mumba.Models.AccountViewModels
 @model LoginRequest
+<div class=container>
 @{ 
 	ViewData["Title"] = "Login";
 }
+
 
 <form method="post">
 		<input asp-for="Username" placeholder="Username">
@@ -18,3 +20,4 @@
 			Login
 		</button>
 </form>
+</div>

@@ -3,17 +3,18 @@
 @{
     ViewData["Title"] = "Register";
 }
-
+<div class="container">
 <form method="post">
+    <input class=validate asp-for="Name" placeholder="Name" required>
     <label>Name</label>
-    <input asp-for="Name" placeholder="Name">
+    <input asp-for="UserName" placeholder="Username" class=validate required>
     <label>Username</label>
-    <input asp-for="UserName" placeholder="Username">
+    <input asp-for="Email" placeholder="Email" type="email" class="validate" required>
     <label>Email</label>
-    <input asp-for="Email" placeholder="Email">
+    <input asp-for="Password" type="password" placeholder="Password" class="validate" required>
     <label>Password</label>
-    <input asp-for="Password" type="password" placeholder="Password">
-    <button class="btn" type="submit">
+    <button class="btn" type="submit" required>
         Register
     </button>
 </form>
+</div>
