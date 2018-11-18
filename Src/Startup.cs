@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Mvc;
+using System.Configuration;
 
 namespace SamMiller.Mumba
 {
@@ -53,8 +54,9 @@ namespace SamMiller.Mumba
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+            
 
-            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["defaultConnection"]));
+            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["ConnectionStrings:defaultConnection"]));
             
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
