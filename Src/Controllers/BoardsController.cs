@@ -10,6 +10,7 @@ using SamMiller.Mumba.Models.BoardViewModels;
 using System;
 using System.Linq;
 using System.Collections;
+using System.Security.Claims;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -32,6 +33,7 @@ namespace SamMiller.Mumba.Controllers
         {
             _context = context;
             _userManager = userManager;
+            
         }
 
         /// <summary>
@@ -39,10 +41,12 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <returns>The view of the users boards</returns>
         [HttpGet]
-        public async Task<IActionResult> All()
+        public  IActionResult All()
         {
-            string uId = _userManager.GetUserAsync(User).Id.ToString();
-            var Boards = await _context.Boards.ToListAsync();
+            var Claims = this.User;
+            ClaimsPrincipal currentUser = this.User;
+            var uId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var Boards = _context.Boards.Where(board => board.UserId == uId).ToList();
             return View(Boards);
         }
 
@@ -54,9 +58,9 @@ namespace SamMiller.Mumba.Controllers
         public async Task<IActionResult> Open([FromRoute] Guid id)
         {
             var board = await _context.Boards.FindAsync(id);
-            var t1 =  await _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==1)).ToListAsync();
-            var t2 = await  _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==2)).ToListAsync();
-            var t3 = await  _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum ==3)).ToListAsync();
+            var t1 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum == 1)).ToListAsync();
+            var t2 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum == 2)).ToListAsync();
+            var t3 = await _context.Tasks.Where(task => task.BoardId == id.ToString()).Intersect(_context.Tasks.Where(task => task.ListNum == 3)).ToListAsync();
 
             return View(model: new BoardView { Board = board, TaskL1 = t1, TaskL2 = t2, TaskL3 = t3 });
         }
@@ -68,7 +72,9 @@ namespace SamMiller.Mumba.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View(new Board { UserId = _userManager.GetUserAsync(User).Id.ToString() });
+            ClaimsPrincipal currentUser = this.User;
+            var uId = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            return View(new Board { UserId = uId });
         }
 
         /// <summary>
@@ -79,6 +85,7 @@ namespace SamMiller.Mumba.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Board board)
         {
+
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(All));
