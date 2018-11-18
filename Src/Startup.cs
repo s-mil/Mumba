@@ -11,6 +11,8 @@ using SamMiller.Mumba.Data;
 using SamMiller.Mumba.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System.Reflection;
+using System.IO;
 
 namespace SamMiller.Mumba
 {
@@ -54,10 +56,6 @@ namespace SamMiller.Mumba
 
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = nameof(Mumba), Version="v1"});
-            });
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -80,20 +78,17 @@ namespace SamMiller.Mumba
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Mumba)+" V1");
-                });
+
             }
-            else{
+            else
+            {
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
