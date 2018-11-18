@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace SamMiller.Mumba
 {
@@ -44,7 +45,7 @@ namespace SamMiller.Mumba
         /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -83,6 +84,7 @@ namespace SamMiller.Mumba
             }
             else
             {
+                app.UseDeveloperExceptionPage();
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
