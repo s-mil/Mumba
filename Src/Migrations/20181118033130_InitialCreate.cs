@@ -231,6 +231,10 @@ namespace Mumba.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
