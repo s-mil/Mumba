@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mumba.Migrations
 {
+    /// <summary>
+    /// The migration creator
+    /// </summary>
     public partial class InitialCreate : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
