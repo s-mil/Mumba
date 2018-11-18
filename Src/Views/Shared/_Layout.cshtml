@@ -44,10 +44,10 @@
                     <a class="brand-logo center"><strong class="text-darken-2">Mumba</strong> </a>
                     <ul class="right">
                         @if (SignInManager.IsSignedIn(User)) {
-
-                        <li class="nav-item cyan-text">
-                            <a asp-controller="Boards" asp-action="Add">Add Board</a>
+                         <li class="nav-item cyan-text">
+                            <a asp-controller="Boards" asp-action="All">Home</a>
                         </li>
+
                         <li class="nav-item amber-text text-darken-2">
                             <a asp-controller="Account" asp-action="Logout">Log Out</a>
                         </li>
