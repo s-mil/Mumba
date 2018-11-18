@@ -34,6 +34,7 @@ namespace SamMiller.Mumba
         {
             _hostingEnvironment = env;
             _configuration = config;
+        
         }
 
         /// <summary>
@@ -52,8 +53,8 @@ namespace SamMiller.Mumba
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<MumbaContext>(options => options.UseInMemoryDatabase(_configuration["connectionString"]));
-
+            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["connectionString"]));
+            
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
 
@@ -96,6 +97,8 @@ namespace SamMiller.Mumba
                     template: "{controller=Boards}/{action=All}/{id?}"
                 );
             });
+
+            
 
         }
     }
