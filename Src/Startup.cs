@@ -14,6 +14,9 @@ using Microsoft.Extensions.Configuration;
 
 namespace SamMiller.Mumba
 {
+    /// <summary>
+    /// Defines the startup behavior for the application
+    /// </summary>
     public class Startup
     {
         private IHostingEnvironment _hostingEnvironment { get; set; }
@@ -31,8 +34,11 @@ namespace SamMiller.Mumba
             _configuration = config;
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to add services to the container.
+        /// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -48,6 +54,11 @@ namespace SamMiller.Mumba
 
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Swashbuckle.AspNetCore.Swagger.Info { Title = nameof(Mumba), Version="v1"});
+            });
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -59,12 +70,21 @@ namespace SamMiller.Mumba
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", nameof(Mumba)+" V1");
+                });
             }
             else{
                 app.UseHsts();

@@ -10,15 +10,26 @@ using Microsoft.Extensions.Logging;
 
 namespace SamMiller.Mumba
 {
+    /// <summary>
+    /// Defines the runtime behavior
+    /// </summary>
     public class Program
     {
+        /// <summary>
+        /// The main method of the program
+        /// </summary>
+        /// <param name="args"></param>
         public static void Main(string[] args)
         {
             CreateWebHostBuilder(args).Build().Run();
 
 
         }
-
+        /// <summary>
+        /// Builds the webhost
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
