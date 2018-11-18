@@ -8,12 +8,20 @@ using SamMiller.Mumba.Models.AccountViewModels;
 
 namespace SamMiller.Mumba.Controllers
 {
+    /// <summary>
+    /// The controller for users
+    /// </summary>
     public class UserController : Controller
     {
         private MumbaContext _context;
 
         private UserManager<AppUser> _userManager;
 
+        /// <summary>
+        /// Initializes the needed private variables
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="userManager"></param>
         public UserController(MumbaContext context, UserManager<AppUser> userManager)
         {
             _context = context;

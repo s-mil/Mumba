@@ -13,6 +13,9 @@ using SamMiller.Mumba.Models.TaskViewModels;
 
 namespace SamMiller.Mumba.Controllers
 {
+    /// <summary>
+    /// The controller for Tasks
+    /// </summary>
     public class TasksController : Controller
     {
         private MumbaContext _context;
@@ -30,13 +33,18 @@ namespace SamMiller.Mumba.Controllers
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Opens a task
+        /// </summary>
+        /// <param name="id">The id of the task to open</param>
+        /// <returns>A view</returns>
         [HttpGet]
         public async Task<IActionResult> Open([FromRoute]Guid id)
         {   
             
             var task = await _context.Tasks.FindAsync(id);
-            var boadId = Guid.Parse(task.BoardId);
-            var board = await _context.Boards.FindAsync(boadId);
+            var boardId = Guid.Parse(task.BoardId);
+            var board = await _context.Boards.FindAsync(boardId);
             return View(model: new TaskDetails { Task = task, Board=board});
         }
 
@@ -51,10 +59,10 @@ namespace SamMiller.Mumba.Controllers
         }
 
         /// <summary>
-        /// Handles the creation of a new board
+        /// Handles the creation of a new task
         /// </summary>
-        /// <param name="board"> A board construct</param>
-        /// <returns> A new board </returns>
+        /// <param name="task"> A task construct</param>
+        /// <returns> A new task </returns>
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Models.Task task)
         {
@@ -66,7 +74,11 @@ namespace SamMiller.Mumba.Controllers
             return RedirectToAction("Open","Boards", routeValues );
         }
 
-
+        /// <summary>
+        /// Returns the view to edit the task
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> Edit([FromRoute]Guid id)
         {
@@ -74,6 +86,11 @@ namespace SamMiller.Mumba.Controllers
             return View(task);
         }
 
+        /// <summary>
+        /// Returns the updated task and saves the changes
+        /// </summary>
+        /// <param name="taskUpdate">The delta task</param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Edit([FromForm] Models.Task taskUpdate)
         {
