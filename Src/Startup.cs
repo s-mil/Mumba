@@ -55,8 +55,13 @@ namespace SamMiller.Mumba
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
             
-
+            if (this._hostingEnvironment.IsDevelopment()){
+            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["defaultConnection"]));
+            }
+            else
+            {
             services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["ConnectionStrings:defaultConnection"]));
+            }
             
             services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<MumbaContext>().AddDefaultTokenProviders();
 
@@ -86,7 +91,7 @@ namespace SamMiller.Mumba
             }
             else
             {
-                app.UseDeveloperExceptionPage();
+                app.UseExceptionHandler("/Boards/Error");
                 app.UseHsts();
             }
             app.UseHttpsRedirection();

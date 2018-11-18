@@ -11,6 +11,7 @@ using System;
 using System.Linq;
 using System.Collections;
 using System.Security.Claims;
+using System.Diagnostics;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -89,6 +90,16 @@ namespace SamMiller.Mumba.Controllers
             _context.Boards.Add(board);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(All));
+        }
+
+        /// <summary>
+        /// Handles error in production
+        /// </summary>
+        /// <returns></returns>
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
     }
