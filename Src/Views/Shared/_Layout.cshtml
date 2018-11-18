@@ -32,8 +32,7 @@
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <title>@ViewData["Title"] - Mumba</title>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
-                media="screen,projection" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"media="screen,projection" />
             <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
             @RenderSection("Style", required: false)
         </head>
@@ -41,29 +40,18 @@
         <body>
             <nav class="purple darken-4">
                 <div>
-                    <a class="brand-logo center"><strong class="text-darken-2">Mumba</strong> </a>
+                    <a class="brand-logo hide-on-small-only"><strong class="cyan-text text-accent-3">Mumba</strong></a>
                     <ul class="right">
-                        @if (SignInManager.IsSignedIn(User)) {
-                         <li class="nav-item cyan-text">
-                            <a asp-controller="Boards" asp-action="All">Home</a>
-                        </li>
-
-                        <li class="nav-item amber-text text-darken-2">
-                            <a asp-controller="Account" asp-action="Logout">Log Out</a>
-                        </li>
-                        <li class="nav-item ">
-                            Hello @UserManager.GetUserName(User)!
-                        </li>
+                        @if (SignInManager.IsSignedIn(User)) 
+                        {
+                            <li class="nav-item"><a asp-controller="Boards" asp-action="All">Home</a></li>
+                            <li class="nav-item"><a asp-controller="Account" asp-action="Logout">Log Out</a></li>
+                            <li class="nav-item">Hello @UserManager.GetUserName(User)!</li>
                         }
                         else
                         {
-                        <li class="nav-item amber-text text-darken-2">
-                            <a asp-controller="Account" asp-action="Login">Log in</a>
-                        </li>
-                        <li>
-                            <a asp-controller="User" asp-action="AddUser">Register</a>
-                        </li>
-
+                            <li class="nav-item"><a asp-controller="Account" asp-action="Login">Log in</a></li>
+                            <li> <a asp-controller="User" asp-action="AddUser">Register</a></li>
                         }
                     </ul>
                 </div>
@@ -77,8 +65,8 @@
             </main>
 
             @RenderSection("Scripts", required: false)
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"
-                crossorigin=" anonymous "></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js" crossorigin=" anonymous "></script>
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         </body>
 
         </html>

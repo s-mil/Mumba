@@ -12,6 +12,7 @@ using System.Linq;
 using System.Collections;
 using System.Security.Claims;
 using System.Diagnostics;
+using Microsoft.AspNetCore.Routing;
 
 namespace SamMiller.Mumba.Controllers
 {
@@ -34,7 +35,7 @@ namespace SamMiller.Mumba.Controllers
         {
             _context = context;
             _userManager = userManager;
-            
+
         }
 
         /// <summary>
@@ -42,7 +43,7 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <returns>The view of the users boards</returns>
         [HttpGet]
-        public  IActionResult All()
+        public IActionResult All()
         {
             var Claims = this.User;
             ClaimsPrincipal currentUser = this.User;
@@ -91,6 +92,41 @@ namespace SamMiller.Mumba.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(All));
         }
+
+        /// <summary>
+        /// Returns the view to edit the board
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Edit([FromRoute]Guid id)
+        {
+            var board = await _context.Boards.FindAsync(id);
+            return View(board);
+        }
+
+        /// <summary>
+        /// Returns the updated board  and saves the changes
+        /// </summary>
+        /// <param name="boardUpdate">The delta task</param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> Edit([FromForm] Board boardUpdate)
+        {
+            var board = await _context.Boards.FindAsync(boardUpdate.Id);
+
+            board.Title = boardUpdate.Title;
+
+
+            var routeValues = new RouteValueDictionary {
+               {"id", board.Id.ToString()}
+           };
+            _context.Boards.Update(board);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Open), "Boards", routeValues);
+        }
+
 
         /// <summary>
         /// Handles error in production

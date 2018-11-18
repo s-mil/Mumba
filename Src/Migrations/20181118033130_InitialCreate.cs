@@ -4,8 +4,15 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Mumba.Migrations
 {
+    /// <summary>
+    /// The migration creator
+    /// </summary>
     public partial class InitialCreate : Migration
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -224,6 +231,10 @@ namespace Mumba.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="migrationBuilder"></param>
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
