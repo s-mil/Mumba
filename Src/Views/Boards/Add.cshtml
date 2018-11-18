@@ -7,6 +7,7 @@
 <form method="post">
     <label>Title of Board:</label>
     <input asp-for="Title" placeholder="Title">
+    <input hidden asp-for="UserId" Model.UserId>
     <button class="btn" type="submit">
         Create
     </button>

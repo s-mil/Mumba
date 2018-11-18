@@ -5,8 +5,15 @@ ViewData["Title"] = "Your Boards:";
 @using System.Collections.Generic
 @model IEnumerable<Board>
 
+<div class="fixed-action-btn">
+    <a asp-action=Add asp-controller="Boards" class="btn-floating btn-large waves-effect waves-light red"><i
+            class="large material-icons">add</i></a>
+</div>
 
+<div class="container">
+  @{var count=0;}
   @foreach (var board in Model) {
+
 
   <div class="row">
     <div class="col s12 m6">
@@ -24,5 +31,6 @@ ViewData["Title"] = "Your Boards:";
       </div>
     </div>
   </div>
-
-  }
+    }
+  
+</div>
