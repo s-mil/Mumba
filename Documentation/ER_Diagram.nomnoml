@@ -1,41 +1,34 @@
-[Comment |
-    Guid Id
-    DateTimeOffset TimeCreated
-    String Text
-]
-
 [Task |
     Guid Id
+    String BoardId
     String Title
+    Int ListNum
     String Description
     DateTimeOffset DueDate
 ]
-[Task] +- [<note>Has Many Comments]
-[<note>Has Many Comments] -> [Comment]
+
 
 [List |
-    Guid Id
     String Title
-    Int BoardPosition
 ]
 [List] +- [<note>Has Many Tasks]
 [<note>Has Many Tasks] -> [Task]
 
 [Board |
     Guid Id
+    String UserId
     String Title
 ]
-[Board] +- [<note>Has Many Lists]
-[<note>Has Many Lists] -> [List]
+[Board] +- [<note>Has 3 Lists]
+[<note>Has 3 Lists] -> [List]
 
 [User |
     Guid Id
     String Username
     String PasswordHash
+    String Email
+    String Name
 ]
-[User] +- [<note>Owner Of Comment]
-[<note>Owner Of Comment] -> [Comment]
-[User] +- [<note>Owner Of Board]
-[<note>Owner Of Board] -> [Board]
-[User] +- [<note>Assigned To]
-[<note>Assigned To] -> [Task]
+
+[User] +- [<note>Owner Of 0 or more Boards]
+[<note>Owner Of 0 or more Boards] -> [Board]
