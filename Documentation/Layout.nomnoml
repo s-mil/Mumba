@@ -1,0 +1,24 @@
+[<frame> Logical Layout |
+    [Website] --> [Asp.Net Core App]
+
+    [Asp.Net Core App] --> [<database> Azure SQL]
+    [Asp.Net Core App] --> [ASP.Net Core Authentication]
+    [Asp.Net Core App] --> [Kestrel Web Server]
+
+    [ASP.Net Core Authentication] --> [Kestrel Web Server]
+
+    [Kestrel Web Server] --> [Azure Web Application]
+]
+
+[<frame> Physical Layout |
+  [<frame> SQL Server |
+  [<database> Azure SQL]]
+
+  [<frame> Azure Web Application Server|
+  [Kesteral Web Server]
+  [ASP.Net Core Application]
+  [Kesteral Web Server] <---> [ASP.Net Core Application]
+  ]
+
+  [SQL Server] <-> [Azure Web Application Server]
+ ]
