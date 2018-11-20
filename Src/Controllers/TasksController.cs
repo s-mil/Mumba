@@ -102,9 +102,10 @@ namespace SamMiller.Mumba.Controllers
             task.ListNum = taskUpdate.ListNum;
 
 
-            var routeValues = new RouteValueDictionary {
+            var routeValues = new RouteValueDictionary 
+            {
                {"id", task.Id.ToString()}
-           };
+            };
             _context.Tasks.Update(task);
             await _context.SaveChangesAsync();
 
@@ -116,15 +117,20 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <param name="id">The id of the task to be deleted</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpGet]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             var task = await _context.Tasks.FindAsync(id);
 
+            var routeValues = new RouteValueDictionary 
+            { 
+                {"id", task.BoardId}
+            };
+
             _context.Tasks.Remove(task);
             await _context.SaveChangesAsync();
 
-            return Ok();
+            return RedirectToAction(nameof(Open), "Boards", routeValues);
         }
 
 

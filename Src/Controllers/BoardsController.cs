@@ -132,7 +132,7 @@ namespace SamMiller.Mumba.Controllers
         /// </summary>
         /// <param name="id">The id of the board to be deleted</param>
         /// <returns></returns>
-        [HttpDelete]
+        [HttpGet]
         public async Task<IActionResult> Delete([FromRoute]Guid id)
         {
             var board = await _context.Boards.FindAsync(id);
