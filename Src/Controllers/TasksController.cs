@@ -16,6 +16,7 @@ namespace SamMiller.Mumba.Controllers
     /// <summary>
     /// The controller for Tasks
     /// </summary>
+    [Authorize]
     public class TasksController : Controller
     {
         private MumbaContext _context;
