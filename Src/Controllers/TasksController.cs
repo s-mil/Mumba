@@ -41,12 +41,12 @@ namespace SamMiller.Mumba.Controllers
         /// <returns>A view</returns>
         [HttpGet]
         public async Task<IActionResult> Open([FromRoute]Guid id)
-        {   
-            
+        {
+
             var task = await _context.Tasks.FindAsync(id);
             var boardId = Guid.Parse(task.BoardId);
             var board = await _context.Boards.FindAsync(boardId);
-            return View(model: new TaskDetails { Task = task, Board=board});
+            return View(model: new TaskDetails { Task = task, Board = board });
         }
 
         /// <summary>
@@ -67,12 +67,12 @@ namespace SamMiller.Mumba.Controllers
         [HttpPost]
         public async Task<IActionResult> Add([FromForm] Models.Task task)
         {
-           var routeValues = new RouteValueDictionary {
+            var routeValues = new RouteValueDictionary {
                {"id", task.BoardId}
            };
-            _context.Tasks.Add(new Models.Task { Title = task.Title, Description=task.Description, BoardId=task.BoardId.ToString(), ListNum=task.ListNum});
+            _context.Tasks.Add(new Models.Task { Title = task.Title, Description = task.Description, BoardId = task.BoardId.ToString(), ListNum = task.ListNum });
             await _context.SaveChangesAsync();
-            return RedirectToAction("Open","Boards", routeValues );
+            return RedirectToAction("Open", "Boards", routeValues);
         }
 
         /// <summary>
@@ -97,20 +97,44 @@ namespace SamMiller.Mumba.Controllers
         {
             var task = await _context.Tasks.FindAsync(taskUpdate.Id);
 
-            task.Title=taskUpdate.Title;
-            task.Description= taskUpdate.Description;
+            task.Title = taskUpdate.Title;
+            task.Description = taskUpdate.Description;
             task.DueDate = taskUpdate.DueDate;
-            task.ListNum=taskUpdate.ListNum;
+            task.ListNum = taskUpdate.ListNum;
 
 
-            var routeValues = new RouteValueDictionary {
+            var routeValues = new RouteValueDictionary 
+            {
                {"id", task.Id.ToString()}
-           };
+            };
             _context.Tasks.Update(task);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Open),"Tasks", routeValues);
+            return RedirectToAction(nameof(Open), "Tasks", routeValues);
         }
+
+        /// <summary>
+        /// The delete function for tasks
+        /// </summary>
+        /// <param name="id">The id of the task to be deleted</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
+        {
+            var task = await _context.Tasks.FindAsync(id);
+
+            var routeValues = new RouteValueDictionary 
+            { 
+                {"id", task.BoardId}
+            };
+
+            _context.Tasks.Remove(task);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Open), "Boards", routeValues);
+        }
+
+
 
     }
 }

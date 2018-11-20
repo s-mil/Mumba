@@ -56,7 +56,7 @@ namespace SamMiller.Mumba
             });
             
             if (this._hostingEnvironment.IsDevelopment()){
-            services.AddDbContext<MumbaContext>(options => options.UseSqlServer(_configuration["defaultConnection"]));
+            services.AddDbContext<MumbaContext>(options => options.UseInMemoryDatabase(_configuration["defaultConnection"]));
             }
             else
             {

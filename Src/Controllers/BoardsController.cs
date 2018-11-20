@@ -127,6 +127,28 @@ namespace SamMiller.Mumba.Controllers
             return RedirectToAction(nameof(Open), "Boards", routeValues);
         }
 
+        /// <summary>
+        /// The delete function for boards
+        /// </summary>
+        /// <param name="id">The id of the board to be deleted</param>
+        /// <returns></returns>
+        [HttpGet]
+        public async Task<IActionResult> Delete([FromRoute]Guid id)
+        {
+            var board = await _context.Boards.FindAsync(id);
+            var tasks = await _context.Tasks.Where(task => task.BoardId == id.ToString()).ToListAsync();
+
+            // Removes all tasks associated with the board
+            foreach(Models.Task task in tasks)
+            {
+                _context.Tasks.Remove(task);
+            }
+
+            _context.Boards.Remove(board);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(All));
+        }
 
         /// <summary>
         /// Handles error in production

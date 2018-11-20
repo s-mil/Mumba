@@ -4,7 +4,9 @@
 @{
     ViewData["Title"] = "Task: " + Model.Task.Title;
 }
-
+<div>
+    <a  asp-action=Delete asp-route-id="@Model.Task.Id" class="waves-effect waves-light red btn"> Delete <i class="material-icons">delete</i></a>
+</div>
    <div class="fixed-action-btn">
     <a asp-action=Edit asp-controller="Tasks" asp-route-id="@Model.Task.Id" class="btn-floating btn-large waves-effect waves-light yellow"><i class="large material-icons">edit</i></a>
    </div>
