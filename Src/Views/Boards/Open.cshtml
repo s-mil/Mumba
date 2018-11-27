@@ -53,10 +53,10 @@ ViewData["Title"] = $"{Model.Board.Title}" ;
         </li>
         @foreach (var task in Model.TaskL2)
         {
-        <li class="collection-item">
+       <li class="collection-item">
             <div class="card hoverable blue-grey">
-                <span class="card-title white-text text-darken-4 center"> @task.Title </span>
-                <div class="card-content activator">
+                <div class="card-content white-text activator">
+                    <span class="card-title center-align"> @task.Title </span>
                     <br>
                     <br>
                     <br>
@@ -83,8 +83,8 @@ ViewData["Title"] = $"{Model.Board.Title}" ;
         {
         <li class="collection-item">
             <div class="card hoverable blue-grey">
-                <span class="card-title white-text text-darken-4 center"> @task.Title </span>
-                <div class="card-content activator">
+                <div class="card-content white-text activator">
+                    <span class="card-title center-align"> @task.Title </span>
                     <br>
                     <br>
                     <br>
