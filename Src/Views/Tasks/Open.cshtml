@@ -17,10 +17,10 @@
         <span class="title"><h3>Description</h3></span>
         <p> @Model.Task.Description</p>
     </li>
-    <li class="collection-item avatar">
+    <!-- <li class="collection-item avatar">
         <span class="title"><h3>Due Date</h3></span>
         <p> @Model.Task.DueDate.ToString() </p>
-    </li>
+    </li> -->
 </ul>
 <a asp-action=Open asp-controller=Boards asp-route-id="@Model.Board.Id" class="btn-large waves-effect center-align" > Return to Board <i class="large material-icons">arrow_back</i></a>
 </div>
