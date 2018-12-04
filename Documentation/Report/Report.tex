@@ -114,18 +114,61 @@ My Project is implemented as a full stack C\# ASP.Net Core application, I used t
 The core functionality of Mumba is inspired by project boards (commonly known as  a kanban board) is commonly seen in Atlassian's Trello.com. Mumba is much simpler, there are not as many features as included in Trello, for example in Mumba's current state each board has 3 lists and only 3 lists, Trello dynamically allows creation and deletion of lists.
 
 \section{System Architectural Design}
-
+\begin{figure}[H]
+  \centering
+  \caption{The System Architecture}
+  \includegraphics[scale=0.45]{Images/System}
+\end{figure}
 The system architecture follows the Model View Controller model of web design. The application was deployed across two Azure instances one is the platform as a service Web App Container that hosts my ASP.Net Core MVC web application, the second instance is a Windows Server Running an SQL Server. With a Azure web application a domain name is automatically registered, in my case my website can be reached at https://mumba.azurewebsites.net.
 
-The views of my websize use Razor (HTML + C\# functionality) pages as a base and materialize css: https://materializecss.com as the basis for the look and feel of my website.
+The views of my websize use Razor (HTML + C\# functionality) pages as a base and materialize css: https://materializecss.com as the basis for the look and feel of my website. The models are made to represent any non static entity that could be used by Mumba, the views are used by the controllers to display the data and forms to the user and build the functionality of the application.
 
+SQL was chosen for the database system due to the general benefits of Relational Databases for persistant storage of data and its ability to integrate with ASP.Net Core web application. The bellow ER diagram was developed with the needs of Mumba in mind.
+
+\begin{figure}[H]
+  \centering
+  \caption{The ER Model}
+  \includegraphics[scale=0.5]{Images/ER}
+\end{figure}
+
+The assumptions and constraints:
+\begin{itemize}
+  \item All Guids are non-nullable
+  \item Lists are static
+\end{itemize}
+
+This model was migrated to relational tables for use in a SQL database that is used by the controllers to retrieve and modify the data. The four tables resulting from my models are shown below, there are several tables used by the Microsoft Identity package that are not included.
 \subsection{Relational table: AppUsers}
-
-\subsection{Relational table: Identity Users}
+The AppUsers table stores user account information. The primary key is the Guid Id and Guid's are inherantly unique.
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+  \hline
+  \underline{ID} & UserName & Email & Password Hash \\
+  Guid & String & String & string\\
+  \hline
+\end{tabular}
+\end{center}
 
 \subsection{Relational table: Boards}
-
+The boards table stores all of the Boards created by users. The primary key is an automatically generated Guid. The User ID is a foriegn key that is the AppUser.ID of the creating user. The Title is a string that will be displayed on the boards listing and at the top of the board.
+\begin{center}
+  \begin{tabular}{|c|c|c|}
+    \hline
+    \underline{ID} & UserID & Title \\
+    Guid & String & String\\
+    \hline
+  \end{tabular}
+  \end{center}
 \subsection{Relational table: Tasks}
+The Tasks table stores all tasks created by users. The primary key is an automatically generated GUid. The BoardId is a foriegn key that attatches a task to a board. The ListNum determines which of the three lists the task is placed in.
+\begin{center}
+  \begin{tabular}{|c|c|c|c|c|c|c|}
+    \hline
+      \underline{Id} & BoardId & ListNum & Title & Description & DueDate & Open \\
+      Guid & string & int & string & string & DateTime & bool \\
+    \hline
+  \end{tabular}
+  \end{center}
 
 \section{Detailed Description of Components}
 
